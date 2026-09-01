@@ -1,120 +1,62 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import { Route, Routes, Navigate } from 'react-router-dom'
+
+//placeholder stuff
+const HomeDashboard = () => <div><h2>Your Dashboard</h2><p>Welcome to your personal area.</p></div>;
+const JoinTeam = () => <div><h2>Join a Team</h2><p>Find your group matches here.</p></div>;
+const Schedule = () => <div><h2>Your Schedule</h2><p>Check upcoming event dates.</p></div>;
+const Chats = () => <div><h2>Your Chats</h2><p>Your team messaging history.</p></div>;
+const Settings = () => <div><h2>Settings Configuration</h2><p>Adjust user preferences.</p></div>;
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Added a state variable to control whether the logged-in views show up
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      {/* Displaying your new GS South Navbar */}
+      <Navbar isLoggedIn={isLoggedIn} />
+      
+      <main style={{ padding: '2rem' }}>
+        {isLoggedIn && (
+        <div className="status-bar">
+        <span className="status-text">Status: Logged into GS South</span>
+        <button className="btn-logout" onClick={() => setIsLoggedIn(false)}>Log Out</button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      )}
 
-      <div className="ticks"></div>
+      <Routes>
+        <Route path="/" element={
+          isLoggedIn ? <Navigate to="/dashboard"/> :(
+            <div className='feature pannel'>
+              <h2>Welcome to gs south laning page</h2>
+            <p>Please log in or sign up to access your dashboard features.</p>
+            </div>
+          )
+        } />
+ {/* Authentication Pages */}
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/sign-up" element={<SignUp setIsLoggedIn={setIsLoggedIn} />} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {/* Protected Dashboard Views */}
+          <Route path="/dashboard" element={isLoggedIn ? <HomeDashboard /> : <Navigate to="/login" />} />
+          <Route path="/join-team" element={isLoggedIn ? <JoinTeam /> : <Navigate to="/login" />} />
+          <Route path="/schedule" element={isLoggedIn ? <Schedule /> : <Navigate to="/login" />} />
+          <Route path="/chats" element={isLoggedIn ? <Chats /> : <Navigate to="/login" />} />
+          
+          {/* Settings Configuration Screen */}
+          <Route path="/settings" element={<Settings />} />
+          
+          {/* Wildcard Route: Catches invalid paths and safely routes users home */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      </main>
     </>
   )
 }
