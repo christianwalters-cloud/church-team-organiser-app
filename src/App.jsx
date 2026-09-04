@@ -1,64 +1,59 @@
-import { useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useAuth } from './context/AuthContext'
 import './App.css'
 import Navbar from './components/Navbar'
-import Login from './pages/Login'
-import SignUp from './pages/SignUp'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import LoginAndSignUp from './pages/LoginAndSignUp'
+import ResetPasswordModal from './components/ResetPasswordModal' // 1. IMPORT MODAL
 
-//placeholder stuff
-const HomeDashboard = () => <div><h2>Your Dashboard</h2><p>Welcome to your personal area.</p></div>;
-const JoinTeam = () => <div><h2>Join a Team</h2><p>Find your group matches here.</p></div>;
-const Schedule = () => <div><h2>Your Schedule</h2><p>Check upcoming event dates.</p></div>;
-const Chats = () => <div><h2>Your Chats</h2><p>Your team messaging history.</p></div>;
-const Settings = () => <div><h2>Settings Configuration</h2><p>Adjust user preferences.</p></div>;
-
+// Placeholder components
+const HomeDashboard = () => <div className="feature-panel"><h2>Your Dashboard</h2><p>Welcome to your personal area.</p></div>;
+const JoinTeam = () => <div className="feature-panel"><h2>Join a Team</h2><p>Find your group matches here.</p></div>;
+const Schedule = () => <div className="feature-panel"><h2>Your Schedule</h2><p>Check upcoming event dates.</p></div>;
+const Chats = () => <div className="feature-panel"><h2>Your Chats</h2><p>Your team messaging history.</p></div>;
+const Settings = () => <div className="feature-panel"><h2>Settings Configuration</h2><p>Adjust user preferences.</p></div>;
 
 function App() {
-  // Added a state variable to control whether the logged-in views show up
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { isLoggedIn, logout } = useAuth(); // Notice how all the extra modal state noise is gone!
 
   return (
     <>
-      {/* Displaying your new GS South Navbar */}
-      <Navbar isLoggedIn={isLoggedIn} />
+      <Navbar />
       
-      <main style={{ padding: '2rem' }}>
+      <main>
         {isLoggedIn && (
-        <div className="status-bar">
-        <span className="status-text">Status: Logged into GS South</span>
-        <button className="btn-logout" onClick={() => setIsLoggedIn(false)}>Log Out</button>
-        </div>
-      )}
+          <div className="status-bar">
+            <span className="status-text">Status: Logged into GS South</span>
+            <button className="btn-logout" onClick={logout}>Log Out</button>
+          </div>
+        )}
 
-      <Routes>
-        <Route path="/" element={
-          isLoggedIn ? <Navigate to="/dashboard"/> :(
-            <div className='feature pannel'>
-              <h2>Welcome to gs south laning page</h2>
-            <p>Please log in or sign up to access your dashboard features.</p>
-            </div>
-          )
-        } />
- {/* Authentication Pages */}
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          <Route path="/sign-up" element={<SignUp setIsLoggedIn={setIsLoggedIn} />} />
+        <Routes>
+          <Route path="/" element={
+            isLoggedIn ? <Navigate to="/dashboard" /> : (
+              <div className="feature-panel">
+                <h2>Welcome to the GS South Landing Page</h2>
+                <p>Please log in or sign up to access your dashboard features.</p>
+              </div>
+            )
+          } />
+
+          <Route path="/login-and-sign-up" element={<LoginAndSignUp />} />
 
           {/* Protected Dashboard Views */}
-          <Route path="/dashboard" element={isLoggedIn ? <HomeDashboard /> : <Navigate to="/login" />} />
-          <Route path="/join-team" element={isLoggedIn ? <JoinTeam /> : <Navigate to="/login" />} />
-          <Route path="/schedule" element={isLoggedIn ? <Schedule /> : <Navigate to="/login" />} />
-          <Route path="/chats" element={isLoggedIn ? <Chats /> : <Navigate to="/login" />} />
+          <Route path="/dashboard" element={isLoggedIn ? <HomeDashboard /> : <Navigate to="/login-and-sign-up" />} />
+          <Route path="/join-team" element={isLoggedIn ? <JoinTeam /> : <Navigate to="/login-and-sign-up" />} />
+          <Route path="/schedule" element={isLoggedIn ? <Schedule /> : <Navigate to="/login-and-sign-up" />} />
+          <Route path="/chats" element={isLoggedIn ? <Chats /> : <Navigate to="/login-and-sign-up" />} />
           
-          {/* Settings Configuration Screen */}
           <Route path="/settings" element={<Settings />} />
-          
-          {/* Wildcard Route: Catches invalid paths and safely routes users home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-
       </main>
+
+      {/* 2. MOUNT THE SEPARATED POPUP COMPONENT OVERLAY */}
+      <ResetPasswordModal />
     </>
   )
 }
 
-export default App
+export default App;

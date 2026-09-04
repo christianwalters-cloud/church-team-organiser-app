@@ -13,6 +13,7 @@ import PaperclipIconSvg from '../assets/paperclip-solid-full.svg'
 import BinIconSvg from '../assets/trash-solid-full.svg'
 import UsersIconSvg from '../assets/users-solid-full.svg'
 import UserPlusIconSvg from '../assets/user-plus-solid-full.svg'
+import LockSvg from '../assets/lock-solid-full.svg'
 
 const ICON_REGISTRY = {
   // Navbar Specific Icons
@@ -23,6 +24,7 @@ const ICON_REGISTRY = {
   settingsImage: SettingsIconSvg,   // Gear for settings configuration
   loginImage: UserIconSvg,          // User circle icon for logging in
   signUpImage: UserPlusIconSvg,         // Plus icon for registration/signing up
+  lockImage: LockSvg,
   
   // Extra Utility Icons (Mapped for future use across your app)
   notification: NotificationIconSvg,

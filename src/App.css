@@ -1,41 +1,100 @@
-/* global settings*/
-*, *::before, *::after {
+/* --- Global Application Layout Containers --- */
+main {
+  margin-top: 100px; /* 🌟 ADD THIS: Creates space below the fixed header layout */
+  padding: 0 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-body {
-  background-color: var(--bg-primary);
+/* --- Floating Modal Overlay Grid System --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent backdrop tint shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Positions container above your fixed top navbar */
+  backdrop-filter: blur(4px); /* Modern frosted-glass background blurring */
+}
+
+.modal-container {
+  background-color: var(--bg-card); /* Adapts to dark/light theme background */
+  border: 1px solid var(--border-color); /* Adapts to your theme boundaries */
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.modal-container h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--text-main); /* Swaps title text colors dynamically */
+}
+
+.modal-container p {
+  color: var(--text-muted); /* Blends paragraph text color dynamically */
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background-color: var(--bg-primary); /* Inputs blend with dark/light canvases */
+  border: 1px solid var(--border-color);
   color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: var(--transition-smooth);
-  min-height: 100vh;             
-  -webkit-font-smoothing: antialiased;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* global themes*/
-:root {
-  --bg-primary: #f8f9fa;
-  --bg-card: #ffffff;
-  --text-main: #212529;
-  --text-muted: #6c757d;
-  --border-color: #dee2e6;
+.input-group input:focus {
+  border-color: var(--text-main);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.2);
 }
 
-body.dark-theme {
-  --bg-primary: #121212;
-  --bg-card: #1e1e1e;
-  --text-main: #f8f9fa;
-  --text-muted: #a0a0a0;
-  --border-color: #333333;
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-body.light-theme {
-  --bg-primary: #f8f9fa;
-  --bg-card: #ffffff;
-  --text-main: #212529;
-  --text-muted: #6c757d;
-  --border-color: #dee2e6;
-  --color-icon: #212529;
+.modal-actions .submit {
+  width: 100%;
 }
+
+.modal-cancel-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.modal-cancel-btn:hover {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+

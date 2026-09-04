@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
 import { Icon } from "../Utils/Icon"; 
+import NavItem from "./NavItem"; // 1. IMPORT YOUR NEW REUSABLE LINK COMPONENT
 import '../css/Navbar.css'
 
-function Navbar({ isLoggedIn }) {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
   
   const privateNavItems = [
     { path: "/join-team", label: "Join a Team", iconName: "joinTeamImage" },
@@ -12,9 +15,10 @@ function Navbar({ isLoggedIn }) {
     { path: "/chats", label: "Your Chats", iconName: "chatsImage" },
   ];
 
+  const closeMobileMenu = () => setIsOpen(false);
+
   return (
     <nav className="navbar" aria-label="Main Navigation">
-      {/* ADDED CONTAINER: This keeps everything fitting nicely inside the screen */}
       <div className="navbar-container">
         
         {/* 1. Brand Logo */}
@@ -22,7 +26,7 @@ function Navbar({ isLoggedIn }) {
           <Link 
             to="/" 
             className="nav-link logo-link" 
-            onClick={() => setIsOpen(false)}
+            onClick={closeMobileMenu}
             aria-label="GS South Home"
           >
             <div aria-hidden="true" className="nav-link-visual-content">
@@ -49,66 +53,35 @@ function Navbar({ isLoggedIn }) {
         <ul className={`navbar-menu ${isOpen ? "mobile-open" : ""}`}>
           {isLoggedIn ? (
             <>
+              {/* Maps clean custom items dynamically */}
               {privateNavItems.map(({ path, label, iconName }) => (
-                <li key={path}>
-                  <Link 
-                    to={path} 
-                    className="nav-link" 
-                    onClick={() => setIsOpen(false)}
-                    aria-label={label}
-                  >
-                    <div aria-hidden="true" className="nav-link-visual-content">
-                      <Icon name={iconName} className="nav-menu-icon" />
-                      <span>{label}</span>
-                    </div>
-                  </Link>
-                </li>
+                <NavItem 
+                  key={path}
+                  path={path}
+                  label={label}
+                  iconName={iconName}
+                  onClick={closeMobileMenu}
+                />
               ))}
             </>
           ) : (
-            <>
-              <li>
-                <Link 
-                  to="/login" 
-                  className="nav-link auth-link" 
-                  onClick={() => setIsOpen(false)}
-                  aria-label="Log into your account"
-                >
-                  <div aria-hidden="true" className="nav-link-visual-content">
-                    <Icon name="loginImage" className="nav-menu-icon" />
-                    <span>Login</span>
-                  </div>
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/sign-up" 
-                  className="nav-link auth-link" 
-                  onClick={() => setIsOpen(false)}
-                  aria-label="Create a new account"
-                >
-                  <div aria-hidden="true" className="nav-link-visual-content">
-                    <Icon name="signUpImage" className="nav-menu-icon" />
-                    <span>Sign Up</span>
-                  </div>
-                </Link>
-              </li>
-            </>
+            /* Renders reusable auth item layout component */
+            <NavItem 
+              path="/login-and-sign-up"
+              label="Login/Sign Up"
+              iconName="loginImage"
+              className="nav-link auth-link"
+              onClick={closeMobileMenu}
+            />
           )}
 
-          <li>
-            <Link 
-              to="/settings" 
-              className="nav-link" 
-              onClick={() => setIsOpen(false)}
-              aria-label="Settings, Configuration panel"
-            >
-              <div aria-hidden="true" className="nav-link-visual-content">
-                <Icon name="settingsImage" className="nav-menu-icon" />
-                <span>Settings</span>
-              </div>
-            </Link>
-          </li>
+          {/* Settings option shared globally across states */}
+          <NavItem 
+            path="/settings"
+            label="Settings"
+            iconName="settingsImage"
+            onClick={closeMobileMenu}
+          />
         </ul>
 
       </div>
