@@ -14,6 +14,8 @@ import BinIconSvg from '../assets/trash-solid-full.svg'
 import UsersIconSvg from '../assets/users-solid-full.svg'
 import UserPlusIconSvg from '../assets/user-plus-solid-full.svg'
 import LockSvg from '../assets/lock-solid-full.svg'
+import OpenEyeSvg from '../assets/eye-slash-solid-full.svg'
+import ClosedEyeSvg from '../assets/eye-solid-full.svg'
 
 const ICON_REGISTRY = {
   // Navbar Specific Icons
@@ -25,15 +27,17 @@ const ICON_REGISTRY = {
   loginImage: UserIconSvg,          // User circle icon for logging in
   signUpImage: UserPlusIconSvg,         // Plus icon for registration/signing up
   lockImage: LockSvg,
+  openEyeImage: OpenEyeSvg,
+  closedEyeImage: ClosedEyeSvg,
   
   // Extra Utility Icons (Mapped for future use across your app)
-  notification: NotificationIconSvg,
-  alert: AlertIconSvg,
-  location: LocationIconSvg,
-  music: MusicIconSvg,
-  attachment: PaperclipIconSvg,
-  delete: BinIconSvg,
-  teamMembers: UsersIconSvg,
+  notificationImage: NotificationIconSvg,
+  alertImage: AlertIconSvg,
+  locationImage: LocationIconSvg,
+  musicImage: MusicIconSvg,
+  attachmentImage: PaperclipIconSvg,
+  deleteImage: BinIconSvg,
+  teamMembersImage: UsersIconSvg,
 };
 
 export function Icon({ name, className = '', ...props }) {

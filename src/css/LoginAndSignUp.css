@@ -52,6 +52,19 @@
   font-weight: 500;
 }
 
+/* --- FIXED: Added missing Success Banner for Auth actions --- */
+.auth-success-banner {
+  color: #10b981; 
+  background-color: #ecfdf5; 
+  padding: 12px; 
+  border-radius: 8px; 
+  font-size: 0.875rem; 
+  margin-bottom: 20px; 
+  text-align: center; 
+  border: 1px solid #d1fae5;
+  font-weight: 500;
+}
+
 /* Flex Form Input Elements Layout Wrapper */
 .inputs { 
   display: flex; 
@@ -172,8 +185,29 @@
   cursor: pointer; 
   padding: 0;
   color: var(--text-main, #151516);
+  margin-left: 5px; /* Slight spacing alignment spacing */
 }
 
 .toggle-action-btn:hover {
   text-decoration: underline;
+}
+
+.password-reveal-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- FIXED: Spelt with 'a' to strictly align with 'visability-icon' template string configuration --- */
+.password-reveal-btn .visability-icon {
+  width: 20px;
+  height: 20px;
+  color: #64748b;
+  fill: #64748b;
+  transition: color 0.2s ease, transform 0.1s ease;
 }

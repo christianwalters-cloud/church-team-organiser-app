@@ -105,6 +105,7 @@
 .auth-link .nav-menu-icon {
     color: var(--color-icon, #212529);
     fill: var(--color-icon, #212529);
+
 }
 
 .auth-link:hover {
@@ -190,9 +191,10 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    font-weight: 600;              /* 🌟 ENHANCED: Makes link text crisp and readable */
-    font-size: 0.95rem;
-    letter-spacing: 0.2px;         /* 🌟 ADDED: Slightly spreads letters for better screen legibility */
+    font-weight: 900;              /* 🌟 ENHANCED: Makes link text crisp and readable */
+    font-size: 1rem;
+    letter-spacing: 0.1px;         /* 🌟 ADDED: Slightly spreads letters for better screen legibility */
+    font-style: bold;
     padding: 0.6rem 1rem; 
     border-radius: 0.5rem;
     color: var(--text-main, #212529);
