@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { Icon } from "../Utils/Icon";
 import '../css/Navbar.css'
 
-function NavItem({ path, label, iconName, className = "nav-link", onClick }) {
+function NavItem({ path, label, iconName, className = "", onClick }) {
   return (
     <li>
       <Link 
         to={path} 
-        className={className} 
+        // 🔧 Combines the mandatory base styles with any conditional variant overrides (e.g. auth-link)
+        className={`nav-link ${className}`.trim()} 
         onClick={onClick}
         aria-label={label}
       >
@@ -21,3 +22,4 @@ function NavItem({ path, label, iconName, className = "nav-link", onClick }) {
 }
 
 export default NavItem;
+

@@ -12,9 +12,6 @@ function ResetPasswordModal() {
   const [modalSuccess, setModalSuccess] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // Return null immediately if the global context switch is turned off
-  if (!showResetModal) return null;
-
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
     setModalError("");
@@ -47,6 +44,9 @@ function ResetPasswordModal() {
       setIsUpdating(false);
     }
   };
+
+  // 🔧 Relocated safety return below state initialization to enforce consistent Hook execution order
+  if (!showResetModal) return null;
 
   return (
     <div className="modal-overlay">
@@ -85,7 +85,11 @@ function ResetPasswordModal() {
             <button 
               type="button" 
               className="modal-cancel-btn" 
-              onClick={() => setShowResetModal(false)}
+              onClick={() => {
+                setShowResetModal(false);
+                setModalError("");
+                setModalSuccess("");
+              }}
             >
               Cancel
             </button>

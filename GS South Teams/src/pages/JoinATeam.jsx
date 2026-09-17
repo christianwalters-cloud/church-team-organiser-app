@@ -29,7 +29,8 @@ function JoinATeam() {
 
         setMessage({ text: `Successfully joined ${subgroupName}!`, type: "success" });
         setTimeout(() => {
-            navigate(`/dashboard/gs-south/${subgroupId}`);
+            // 🔧 Fixed redirection pathway to match valid routing options in App.jsx
+            navigate('/dashboard'); 
         }, 1500);
     };
 
@@ -76,7 +77,7 @@ function JoinATeam() {
                 throw new Error("Invalid sub-team code. Please check and try again.");
             }
 
-            // 🚀 Call helper to link user to the team in the database
+            // Call helper to link user to the team in the database
             await saveMembershipToDb(subgroup.id, subgroup.name);
 
         } catch (error) {
@@ -92,7 +93,7 @@ function JoinATeam() {
         setMessage({ text: "", type: "" });
 
         try {
-            // 🚀 Call helper to link user to the team in the database
+            // Call helper to link user to the team in the database
             await saveMembershipToDb(subgroupId, subgroupName);
         } catch (error) {
             setMessage({ text: error.message, type: "error" });
@@ -173,7 +174,6 @@ function JoinATeam() {
                                             <span className="subgroup-desc">{sub.description}</span>
                                         )}
                                     </div>
-                                    {/* 🚀 Updated button to explicitly register membership on click */}
                                     <button 
                                         onClick={() => handleJoinPublicTeam(sub.id, sub.name)}
                                         className="toggle-action-btn subgroup-join-link"

@@ -5,10 +5,11 @@ import Navbar from './components/Navbar'
 import LoginAndSignUp from './pages/LoginAndSignUp'
 import ResetPasswordModal from './components/ResetPasswordModal' 
 import JoinATeam from './pages/JoinATeam' 
-import YourSchedule from './pages/YourShedule' 
+import YourSchedule from './pages/YourSchedule' 
+import HomeDashboard from './pages/HomeDashboard';
+
 
 // Cleaned placeholder components block
-const HomeDashboard = () => <div className="feature-panel"><h2>Your Dashboard</h2><p>Welcome to your personal area.</p></div>;
 const Chats = () => <div className="feature-panel"><h2>Your Chats</h2><p>Your team messaging history.</p></div>;
 const Settings = () => <div className="feature-panel"><h2>Settings Configuration</h2><p>Adjust user preferences.</p></div>;
 
@@ -45,7 +46,10 @@ function App() {
           <Route path="/join-team" element={isLoggedIn ? <JoinATeam /> : <Navigate to="/login-and-sign-up" />} />
           
           {/* 🚀 REAL COMPONENT LINKED HERE INSTEAD OF THE PLACEHOLDER */}
-          <Route path="/schedule" element={isLoggedIn ? <YourSchedule /> : <Navigate to="/login-and-sign-up" />} />
+         {/* 🔧 Modified schedule routing to support both personal view and deep-linked group calendars */}
+         <Route path="/schedule" element={isLoggedIn ? <YourSchedule /> : <Navigate to="/login-and-sign-up" />} />
+         <Route path="/schedule/:subgroupId" element={isLoggedIn ? <YourSchedule /> : <Navigate to="/login-and-sign-up" />} />
+
           
           <Route path="/chats" element={isLoggedIn ? <Chats /> : <Navigate to="/login-and-sign-up" />} />
           

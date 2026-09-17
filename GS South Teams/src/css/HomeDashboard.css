@@ -1,0 +1,168 @@
+/* ==========================================================================
+   HomeDashboard Stylesheet
+   ========================================================================== */
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  color: #64748b;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Custom Card Wrapper Extensions */
+.team-dashboard-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.team-dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+.card-header-group h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.35rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.team-card-description {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Card Action Layout Adjustments */
+.card-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Action Button Overrides */
+.view-rota-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: #ffffff;
+  transition: background-color 0.15s ease;
+}
+
+.view-rota-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.leave-team-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 6px;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.leave-team-btn:hover {
+  background-color: #dc2626 !important;
+}
+
+.leave-team-btn:disabled {
+  background-color: #fca5a5 !important;
+  cursor: not-allowed;
+}
+
+/* Empty State Adjustments */
+.empty-dashboard-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.empty-dashboard-state p {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+}
+
+.link-btn {
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.link-btn:hover {
+  background-color: #334155;
+}
+
+/* Mobile Responsive Tweaks */
+@media (max-width: 480px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .view-rota-btn, 
+  .leave-team-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

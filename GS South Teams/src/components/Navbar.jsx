@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { Icon } from "../Utils/Icon"; 
-import NavItem from "./NavItem"; // 1. IMPORT YOUR NEW REUSABLE LINK COMPONENT
+import NavItem from "./NavItem"; 
 import '../css/Navbar.css'
 
 function Navbar() {
@@ -65,12 +65,12 @@ function Navbar() {
               ))}
             </>
           ) : (
-            /* Renders reusable auth item layout component */
+            /* Renders reusable auth item layout component with explicit class formatting flags */
             <NavItem 
               path="/login-and-sign-up"
               label="Login/Sign Up"
               iconName="loginImage"
-              className="nav-link auth-link"
+              className="auth-link"
               onClick={closeMobileMenu}
             />
           )}

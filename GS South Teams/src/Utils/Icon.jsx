@@ -25,10 +25,12 @@ const ICON_REGISTRY = {
   chatsImage: MessageIconSvg,       // Envelope for messaging/chats
   settingsImage: SettingsIconSvg,   // Gear for settings configuration
   loginImage: UserIconSvg,          // User circle icon for logging in
-  signUpImage: UserPlusIconSvg,         // Plus icon for registration/signing up
+  signUpImage: UserPlusIconSvg,     // Plus icon for registration/signing up
   lockImage: LockSvg,
-  openEyeImage: OpenEyeSvg,
-  closedEyeImage: ClosedEyeSvg,
+  
+  // 🔧 Swapped asset allocations to ensure password reveal graphics match action states accurately
+  openEyeImage: ClosedEyeSvg,       // 'openEyeImage' uses eye-solid-full.svg (Visible state)
+  closedEyeImage: OpenEyeSvg,       // 'closedEyeImage' uses eye-slash-solid-full.svg (Hidden state)
   
   // Extra Utility Icons (Mapped for future use across your app)
   notificationImage: NotificationIconSvg,
@@ -52,7 +54,7 @@ export function Icon({ name, className = '', ...props }) {
     <img 
       src={iconSrc}                      
       alt="" // Explicitly empty tells screen readers this icon is decorative
-      className={`nav-icon ${className}`} 
+      className={`nav-icon ${className}`.trim()} 
       {...props} 
     />
   );
