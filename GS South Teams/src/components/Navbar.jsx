@@ -9,10 +9,11 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   
+  // 🔗 Clean private links list—dropped the duplicate Dashboard item so it doesn't clutter your spacing
   const privateNavItems = [
     { path: "/join-team", label: "Join a Team", iconName: "joinTeamImage" },
     { path: "/schedule", label: "Your Schedule", iconName: "scheduleImage" },
-    { path: "/chats", label: "Your Chats", iconName: "chatsImage" },
+    { path: "/your-chats", label: "Your Chats", iconName: "chatsImage" },
   ];
 
   const closeMobileMenu = () => setIsOpen(false);
@@ -21,7 +22,7 @@ function Navbar() {
     <nav className="navbar" aria-label="Main Navigation">
       <div className="navbar-container">
         
-        {/* 1. Brand Logo */}
+        {/* 1. Brand Logo - Links to "/" which triggers the redirect straight to /dashboard via your App.jsx protected views */}
         <div className="navbar-logo">
           <Link 
             to="/" 

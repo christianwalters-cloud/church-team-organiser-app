@@ -7,10 +7,10 @@ import ResetPasswordModal from './components/ResetPasswordModal'
 import JoinATeam from './pages/JoinATeam' 
 import YourSchedule from './pages/YourSchedule' 
 import HomeDashboard from './pages/HomeDashboard';
+import YourChats from './pages/YourChats';
 
 
 // Cleaned placeholder components block
-const Chats = () => <div className="feature-panel"><h2>Your Chats</h2><p>Your team messaging history.</p></div>;
 const Settings = () => <div className="feature-panel"><h2>Settings Configuration</h2><p>Adjust user preferences.</p></div>;
 
 function App() {
@@ -51,7 +51,7 @@ function App() {
          <Route path="/schedule/:subgroupId" element={isLoggedIn ? <YourSchedule /> : <Navigate to="/login-and-sign-up" />} />
 
           
-          <Route path="/chats" element={isLoggedIn ? <Chats /> : <Navigate to="/login-and-sign-up" />} />
+          <Route path="/your-chats" element={isLoggedIn ? <YourChats /> : <Navigate to="/login-and-sign-up" />} />
           
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="/" />} />
